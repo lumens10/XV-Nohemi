@@ -1,55 +1,24 @@
- body {
-    text-align: center;
-    margin-top: 80px; /* 👈 esto lo centra como antes */
-    background: transparent; /* 👈 sin fondo */
-    font-family: 'Georgia', serif;
-  }
+const audio = document.getElementById("audio");
+const playBtn = document.getElementById("playBtn");
 
-  .player {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* 🔥 esto centra TODO */
-  }
+console.log("Audio encontrado:", audio);
+console.log("Fuente del audio:", audio.currentSrc);
+console.log("URL del audio:", audio.src);
 
-  .play-btn {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    border: 2px solid #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
-    font-size: 28px;
-    color: #ffffff;
-    cursor: pointer;
-    transition: 0.3s;
-    background: transparent;
-  }
+playBtn.addEventListener("click", function () {
 
-  .play-btn:hover {
-    background: rgba(107,112,92,0.1);
-  }
+  console.log("Botón presionado");
+  console.log("Estado:", audio.readyState);
+  console.log("Fuente:", audio.currentSrc);
+  console.log("Duración:", audio.duration);
 
-  .progress-container {
-    width: 200px;
-    height: 4px;
-    background: rgba(214,211,205,0.6);
-    margin: 20px auto;
-    border-radius: 2px;
-    cursor: pointer;
-    overflow: hidden;
-  }
+  audio.play()
+    .then(() => {
+      console.log("¡REPRODUCCIÓN INICIADA!");
+      playBtn.textContent = "❚❚";
+    })
+    .catch((error) => {
+      console.error("ERROR DE AUDIO:", error);
+    });
 
-  .progress {
-    height: 100%;
-    width: 0%;
-    background: #ffffff;
-  }
-
-  .caption {
-    margin-top: 10px;
-    font-size: 12px;
-    color: #ffffff;
-    letter-spacing: 2px;
-  }
+});
