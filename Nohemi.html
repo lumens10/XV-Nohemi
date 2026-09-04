@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mis XV Nohemi</title>
+
+    <!-- Tipografías elegantes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            overflow: hidden;
+            background:
+                radial-gradient(
+                    circle at center,
+                    #f8efd9 0%,
+                    #f2e4c6 55%,
+                    #ead5ae 100%
+                );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            position: relative;
+        }
+
+        /* -----------------------------
+           CONTENEDOR PRINCIPAL
+        ----------------------------- */
+
+        .invitacion {
+            width: 100%;
+            height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            position: relative;
+
+            text-align: center;
+
+            z-index: 5;
+        }
+
+        /* -----------------------------
+           TEXTO
+        ----------------------------- */
+
+        .titulo {
+            color: #741f35;
+
+            font-family: "Great Vibes", cursive;
+
+            font-size: clamp(55px, 9vw, 125px);
+
+            font-weight: 400;
+
+            line-height: 1.1;
+
+            text-shadow:
+                0 2px 2px rgba(90, 20, 35, 0.12),
+                0 0 18px rgba(255, 255, 255, 0.35);
+
+            animation:
+                aparecer 2s ease-out forwards,
+                brillo 4s ease-in-out 2s infinite;
+
+            opacity: 0;
+        }
+
+        .subtitulo {
+            margin-top: 12px;
+
+            color: #8a2942;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: clamp(13px, 1.8vw, 21px);
+
+            letter-spacing: 7px;
+
+            text-transform: uppercase;
+
+            animation: aparecerSubtitulo 2s ease-out 0.8s forwards;
+
+            opacity: 0;
+        }
+
+        /* -----------------------------
+           ADORNOS
+        ----------------------------- */
+
+        .adorno {
+            position: absolute;
+
+            width: 230px;
+            height: 230px;
+
+            pointer-events: none;
+
+            opacity: 0.95;
+
+            filter:
+                drop-shadow(0 2px 2px rgba(117, 73, 20, 0.15))
+                drop-shadow(0 0 8px rgba(181, 133, 42, 0.15));
+
+            animation: flotar 7s ease-in-out infinite;
+        }
+
+        .adorno svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Esquina superior izquierda */
+
+        .esquina-superior-izquierda {
+            top: -20px;
+            left: -20px;
+        }
+
+        /* Esquina superior derecha */
+
+        .esquina-superior-derecha {
+            top: -20px;
+            right: -20px;
+
+            transform: scaleX(-1);
+        }
+
+        /* Esquina inferior izquierda */
+
+        .esquina-inferior-izquierda {
+            bottom: -20px;
+            left: -20px;
+
+            transform: scaleY(-1);
+        }
+
+        /* Esquina inferior derecha */
+
+        .esquina-inferior-derecha {
+            bottom: -20px;
+            right: -20px;
+
+            transform: scale(-1);
+        }
+
+        /* -----------------------------
+           MARCO INTERIOR
+        ----------------------------- */
+
+        .marco {
+            position: absolute;
+
+            inset: 25px;
+
+            border: 1px solid rgba(167, 118, 31, 0.45);
+
+            pointer-events: none;
+        }
+
+        .marco::before {
+            content: "";
+
+            position: absolute;
+
+            inset: 8px;
+
+            border: 1px solid rgba(167, 118, 31, 0.22);
+        }
+
+        /* -----------------------------
+           BRILLOS
+        ----------------------------- */
+
+        .particula {
+            position: absolute;
+
+            width: 5px;
+            height: 5px;
+
+            border-radius: 50%;
+
+            background: #c49a45;
+
+            box-shadow:
+                0 0 8px #d9bd73,
+                0 0 14px rgba(201, 159, 70, 0.7);
+
+            opacity: 0;
+
+            animation: destello 5s infinite;
+        }
+
+        .p1 {
+            top: 22%;
+            left: 18%;
+            animation-delay: 1s;
+        }
+
+        .p2 {
+            top: 30%;
+            right: 20%;
+            animation-delay: 3s;
+        }
+
+        .p3 {
+            bottom: 25%;
+            left: 24%;
+            animation-delay: 2s;
+        }
+
+        .p4 {
+            bottom: 18%;
+            right: 25%;
+            animation-delay: 4s;
+        }
+
+        /* -----------------------------
+           ANIMACIONES
+        ----------------------------- */
+
+        @keyframes aparecer {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes aparecerSubtitulo {
+            0% {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes brillo {
+            0%, 100% {
+                text-shadow:
+                    0 2px 2px rgba(90, 20, 35, 0.12),
+                    0 0 15px rgba(255,255,255,0.25);
+            }
+
+            50% {
+                text-shadow:
+                    0 2px 2px rgba(90, 20, 35, 0.12),
+                    0 0 30px rgba(255,255,255,0.55);
+            }
+        }
+
+        @keyframes flotar {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-7px);
+            }
+        }
+
+        @keyframes destello {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            30% {
+                opacity: 0.8;
+                transform: scale(1);
+            }
+
+            60% {
+                opacity: 0;
+                transform: scale(1.5);
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* -----------------------------
+           MÓVILES
+        ----------------------------- */
+
+        @media (max-width: 600px) {
+
+            .adorno {
+                width: 145px;
+                height: 145px;
+            }
+
+            .esquina-superior-izquierda,
+            .esquina-superior-derecha {
+                top: -10px;
+            }
+
+            .esquina-inferior-izquierda,
+            .esquina-inferior-derecha {
+                bottom: -10px;
+            }
+
+            .marco {
+                inset: 14px;
+            }
+
+            .subtitulo {
+                letter-spacing: 4px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="invitacion">
+
+        <!-- Marco -->
+        <div class="marco"></div>
+
+        <!-- Adorno superior izquierdo -->
+        <div class="adorno esquina-superior-izquierda">
+            <svg viewBox="0 0 250 250">
+
+                <g
+                    fill="none"
+                    stroke="#b88a32"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+
+                    <!-- Curvas principales -->
+                    <path d="M20 25 C75 15, 100 40, 125 80"/>
+                    <path d="M25 45 C60 35, 75 55, 105 85"/>
+                    <path d="M30 70 C55 55, 75 75, 92 98"/>
+
+                    <!-- Volutas -->
+                    <path d="M20 25 C10 50, 25 70, 48 63 C65 58, 58 40, 45 48 C34 55, 42 68, 52 61"/>
+
+                    <path d="M75 18 C105 8, 130 25, 124 50 C120 68, 100 66, 102 51 C104 40, 119 43, 113 53"/>
+
+                    <path d="M40 100 C20 115, 22 140, 45 143 C65 146, 72 126, 58 120 C45 114, 37 128, 48 133"/>
+
+                    <!-- Hojas -->
+                    <path d="M92 70 C115 52, 130 58, 126 75 C112 78, 102 76, 92 70Z"/>
+                    <path d="M68 91 C90 76, 108 84, 103 101 C88 103, 77 100, 68 91Z"/>
+                    <path d="M45 115 C62 104, 78 112, 74 126 C62 129, 52 125, 45 115Z"/>
+
+                    <!-- Detalles -->
+                    <path d="M110 90 C145 65, 175 75, 181 102"/>
+                    <path d="M125 105 C155 88, 180 95, 188 117"/>
+
+                </g>
+
+                <!-- pequeños puntos dorados -->
+
+                <g fill="#c49a45">
+                    <circle cx="22" cy="25" r="4"/>
+                    <circle cx="92" cy="70" r="3"/>
+                    <circle cx="68" cy="91" r="3"/>
+                    <circle cx="45" cy="115" r="3"/>
+                </g>
+
+            </svg>
+        </div>
+
+        <!-- Superior derecho -->
+        <div class="adorno esquina-superior-derecha">
+            <svg viewBox="0 0 250 250">
+
+                <g
+                    fill="none"
+                    stroke="#b88a32"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+
+                    <path d="M20 25 C75 15, 100 40, 125 80"/>
+                    <path d="M25 45 C60 35, 75 55, 105 85"/>
+                    <path d="M30 70 C55 55, 75 75, 92 98"/>
+
+                    <path d="M20 25 C10 50, 25 70, 48 63 C65 58, 58 40, 45 48 C34 55, 42 68, 52 61"/>
+
+                    <path d="M75 18 C105 8, 130 25, 124 50 C120 68, 100 66, 102 51 C104 40, 119 43, 113 53"/>
+
+                    <path d="M40 100 C20 115, 22 140, 45 143 C65 146, 72 126, 58 120 C45 114, 37 128, 48 133"/>
+
+                    <path d="M92 70 C115 52, 130 58, 126 75 C112 78, 102 76, 92 70Z"/>
+                    <path d="M68 91 C90 76, 108 84, 103 101 C88 103, 77 100, 68 91Z"/>
+                    <path d="M45 115 C62 104, 78 112, 74 126 C62 129, 52 125, 45 115Z"/>
+
+                </g>
+
+                <g fill="#c49a45">
+                    <circle cx="22" cy="25" r="4"/>
+                    <circle cx="92" cy="70" r="3"/>
+                    <circle cx="68" cy="91" r="3"/>
+                    <circle cx="45" cy="115" r="3"/>
+                </g>
+
+            </svg>
+        </div>
+
+        <!-- Inferior izquierdo -->
+        <div class="adorno esquina-inferior-izquierda">
+            <svg viewBox="0 0 250 250">
+
+                <g
+                    fill="none"
+                    stroke="#b88a32"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+
+                    <path d="M20 25 C75 15, 100 40, 125 80"/>
+                    <path d="M25 45 C60 35, 75 55, 105 85"/>
+                    <path d="M30 70 C55 55, 75 75, 92 98"/>
+
+                    <path d="M20 25 C10 50, 25 70, 48 63 C65 58, 58 40, 45 48 C34 55, 42 68, 52 61"/>
+
+                    <path d="M75 18 C105 8, 130 25, 124 50 C120 68, 100 66, 102 51 C104 40, 119 43, 113 53"/>
+
+                    <path d="M40 100 C20 115, 22 140, 45 143 C65 146, 72 126, 58 120 C45 114, 37 128, 48 133"/>
+
+                    <path d="M92 70 C115 52, 130 58, 126 75 C112 78, 102 76, 92 70Z"/>
+                    <path d="M68 91 C90 76, 108 84, 103 101 C88 103, 77 100, 68 91Z"/>
+
+                </g>
+
+                <g fill="#c49a45">
+                    <circle cx="22" cy="25" r="4"/>
+                    <circle cx="92" cy="70" r="3"/>
+                    <circle cx="68" cy="91" r="3"/>
+                </g>
+
+            </svg>
+        </div>
+
+        <!-- Inferior derecho -->
+        <div class="adorno esquina-inferior-derecha">
+            <svg viewBox="0 0 250 250">
+
+                <g
+                    fill="none"
+                    stroke="#b88a32"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+
+                    <path d="M20 25 C75 15, 100 40, 125 80"/>
+                    <path d="M25 45 C60 35, 75 55, 105 85"/>
+                    <path d="M30 70 C55 55, 75 75, 92 98"/>
+
+                    <path d="M20 25 C10 50, 25 70, 48 63 C65 58, 58 40, 45 48 C34 55, 42 68, 52 61"/>
+
+                    <path d="M75 18 C105 8, 130 25, 124 50 C120 68, 100 66, 102 51 C104 40, 119 43, 113 53"/>
+
+                    <path d="M40 100 C20 115, 22 140, 45 143 C65 146, 72 126, 58 120 C45 114, 37 128, 48 133"/>
+
+                    <path d="M92 70 C115 52, 130 58, 126 75 C112 78, 102 76, 92 70Z"/>
+                    <path d="M68 91 C90 76, 108 84, 103 101 C88 103, 77 100, 68 91Z"/>
+
+                </g>
+
+                <g fill="#c49a45">
+                    <circle cx="22" cy="25" r="4"/>
+                    <circle cx="92" cy="70" r="3"/>
+                    <circle cx="68" cy="91" r="3"/>
+                </g>
+
+            </svg>
+        </div>
+
+        <!-- Partículas -->
+        <div class="particula p1"></div>
+        <div class="particula p2"></div>
+        <div class="particula p3"></div>
+        <div class="particula p4"></div>
+
+        <!-- TEXTO CENTRAL -->
+
+        <h1 class="titulo">
+            MIS XV<br>
+            NOHEMI
+        </h1>
+
+        <div class="subtitulo">
+            Una noche para recordar
+        </div>
+
+    </div>
+
+</body>
+</html>
