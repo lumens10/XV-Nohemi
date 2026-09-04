@@ -3,33 +3,49 @@ const playBtn = document.getElementById("playBtn");
 const progressContainer = document.getElementById("progressContainer");
 const progress = document.getElementById("progress");
 
-playBtn.addEventListener("click", () => {
+playBtn.addEventListener("click", function () {
+
   if (audio.paused) {
-    audio.play();
-    playBtn.innerHTML = "❚❚";
+    audio.play()
+      .then(() => {
+        playBtn.textContent = "❚❚";
+      })
+      .catch((error) => {
+        console.error("No se pudo reproducir:", error);
+      });
+
   } else {
     audio.pause();
-    playBtn.innerHTML = "▶";
+    playBtn.textContent = "▶";
   }
+
 });
 
-audio.addEventListener("timeupdate", () => {
-  if (audio.duration) {
-    const percent = (audio.currentTime / audio.duration) * 100;
-    progress.style.width = percent + "%";
+audio.addEventListener("timeupdate", function () {
+
+  if (!isNaN(audio.duration)) {
+    const porcentaje =
+      (audio.currentTime / audio.duration) * 100;
+
+    progress.style.width = porcentaje + "%";
   }
+
 });
 
-progressContainer.addEventListener("click", (event) => {
-  const width = progressContainer.clientWidth;
-  const clickX = event.offsetX;
+progressContainer.addEventListener("click", function (event) {
 
-  if (audio.duration) {
-    audio.currentTime = (clickX / width) * audio.duration;
+  if (!isNaN(audio.duration)) {
+
+    const ancho = progressContainer.clientWidth;
+    const posicion = event.offsetX;
+
+    audio.currentTime =
+      (posicion / ancho) * audio.duration;
   }
+
 });
 
-audio.addEventListener("ended", () => {
-  playBtn.innerHTML = "▶";
+audio.addEventListener("ended", function () {
+  playBtn.textContent = "▶";
   progress.style.width = "0%";
 });
